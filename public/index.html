@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>THOU ART WHAT — The Bard's Insult Oracle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="curOuter"></div>
+<div id="curText" class="cur-text"></div>
+
+<!-- WEBGL CANVAS -->
+<canvas id="gl"></canvas>
+
+<!-- NOISE + VIGNETTE -->
+<div class="noise"></div>
+<div class="vignette"></div>
+
+<!-- ═══════════════════════════════════════
+     PRELOADER
+═══════════════════════════════════════ -->
+<div id="loader">
+  <div class="ld-bg"></div>
+  <div class="ld-body">
+    <div class="ld-act">ACT I</div>
+    <div class="ld-title">THE BARD<br/>AWAKENS</div>
+    <div class="ld-track"><div class="ld-fill" id="ldFill"></div></div>
+    <div class="ld-num" id="ldNum">000</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     HERO — FULL VIEWPORT
+═══════════════════════════════════════ -->
+<section id="hero">
+
+  <div class="hero-noise-text">SHAKESPEARE</div>
+
+  <nav class="nav" id="nav">
+    <div class="nav-logo">❦ The Globe</div>
+    <div class="nav-links">
+      <span class="nav-link" data-target="gameSec">Play</span>
+      <span class="nav-link" data-target="histSec">History</span>
+    </div>
+  </nav>
+
+  <!-- split panels -->
+  <div class="hero-split">
+    <div class="hero-panel hp-left" id="hpLeft">
+      <div class="hp-inner">
+        <div class="hp-overline" id="hov">The Globe Theatre · Est. 1599</div>
+        <div class="hp-title-wrap">
+          <div class="hp-line" id="hl1"><span>THOU</span></div>
+          <div class="hp-line" id="hl2"><span>ART</span></div>
+          <div class="hp-line hp-gold" id="hl3"><span>WHAT?</span></div>
+        </div>
+        <p class="hp-body" id="hbody">
+          Twenty of the Bard's most venomous insults await.<br/>
+          Canst thou divine their meaning — or wilt thou be exposed as a gudgeon?
+        </p>
+        <div class="hp-cta-row" id="hcta">
+          <button class="pill-btn mag" id="ctaPlay">
+            <span class="pb-inner">Begin Thy Lesson</span>
+            <span class="pb-icon">↓</span>
+          </button>
+          <div class="hp-scroll">
+            <div class="hs-track"><div class="hs-thumb"></div></div>
+            <span>Scroll</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-panel hp-right" id="hpRight">
+      <div class="hp-right-inner">
+        <!-- Animated 3D SVG theatre mask -->
+        <div class="mask-scene" id="maskScene">
+          <div class="mask-glow"></div>
+          <svg class="mask-svg" viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="mgold" cx="50%" cy="40%" r="60%">
+                <stop offset="0%" stop-color="#e8c96a"/>
+                <stop offset="60%" stop-color="#c9a84c"/>
+                <stop offset="100%" stop-color="#5a3a10"/>
+              </radialGradient>
+              <radialGradient id="meye" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#1a0800"/>
+                <stop offset="100%" stop-color="#0a0400"/>
+              </radialGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <!-- Tragedy mask -->
+            <g class="mask-face" filter="url(#glow)">
+              <ellipse cx="200" cy="200" rx="130" ry="155" fill="url(#mgold)" stroke="#8a6820" stroke-width="1.5"/>
+              <!-- brow ridge -->
+              <path d="M100 150 Q200 120 300 150" stroke="#8a6820" stroke-width="2" fill="none" opacity="0.5"/>
+              <!-- eyes hollow -->
+              <ellipse cx="155" cy="175" rx="28" ry="20" fill="url(#meye)"/>
+              <ellipse cx="245" cy="175" rx="28" ry="20" fill="url(#meye)"/>
+              <!-- eye glints -->
+              <circle cx="160" cy="170" r="3" fill="rgba(232,201,106,0.6)"/>
+              <circle cx="250" cy="170" r="3" fill="rgba(232,201,106,0.6)"/>
+              <!-- nose -->
+              <path d="M195 185 L185 230 Q200 240 215 230 L205 185 Z" fill="#8a6820" opacity="0.6"/>
+              <!-- mouth — turned down (tragedy) -->
+              <path d="M145 270 Q200 250 255 270" stroke="#5a3a10" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M145 270 Q135 285 145 295" stroke="#5a3a10" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M255 270 Q265 285 255 295" stroke="#5a3a10" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <!-- forehead detail lines -->
+              <path d="M155 140 Q175 132 195 138" stroke="#8a6820" stroke-width="1.5" fill="none" opacity="0.7"/>
+              <path d="M205 138 Q225 132 245 140" stroke="#8a6820" stroke-width="1.5" fill="none" opacity="0.7"/>
+              <!-- cheek contours -->
+              <path d="M100 200 Q85 230 95 265" stroke="#8a6820" stroke-width="1" fill="none" opacity="0.4"/>
+              <path d="M300 200 Q315 230 305 265" stroke="#8a6820" stroke-width="1" fill="none" opacity="0.4"/>
+              <!-- chin cleft -->
+              <circle cx="200" cy="340" r="6" fill="#8a6820" opacity="0.3"/>
+              <!-- ornamental crown top -->
+              <path d="M130 70 L155 45 L175 65 L200 30 L225 65 L245 45 L270 70 Q200 55 130 70Z" fill="url(#mgold)" stroke="#8a6820" stroke-width="1"/>
+              <!-- crown gems -->
+              <circle cx="200" cy="35" r="6" fill="#c0392b"/>
+              <circle cx="155" cy="50" r="4" fill="#2980b9"/>
+              <circle cx="245" cy="50" r="4" fill="#27ae60"/>
+              <!-- tear drop (tragedy) -->
+              <path d="M140 210 Q136 218 140 224 Q144 218 140 210Z" fill="#6a8fb0" opacity="0.8"/>
+            </g>
+            <!-- floating runes -->
+            <g class="runes" opacity="0.25">
+              <text x="40"  y="100" font-size="20" fill="#c9a84c" font-family="serif">⚜</text>
+              <text x="340" y="100" font-size="20" fill="#c9a84c" font-family="serif">⚜</text>
+              <text x="30"  y="300" font-size="16" fill="#c9a84c" font-family="serif">✦</text>
+              <text x="355" y="300" font-size="16" fill="#c9a84c" font-family="serif">✦</text>
+              <text x="60"  y="380" font-size="24" fill="#c9a84c" font-family="serif">❧</text>
+              <text x="320" y="380" font-size="24" fill="#c9a84c" font-family="serif">❧</text>
+            </g>
+          </svg>
+          <!-- floating labels -->
+          <div class="mask-tag mt-1">Tragedy</div>
+          <div class="mask-tag mt-2">1599 AD</div>
+          <div class="mask-tag mt-3">Act I</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- scrolling ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>THOU LUMPISH GUDGEON</span><span class="tk-dot">◆</span>
+      <span>THOU PRIBBLING MAGGOT-PIE</span><span class="tk-dot">◆</span>
+      <span>THOU RANK MOLDWARP</span><span class="tk-dot">◆</span>
+      <span>THOU GLEEKING PUTTOCK</span><span class="tk-dot">◆</span>
+      <span>THOU YEASTY HARPY</span><span class="tk-dot">◆</span>
+      <span>THOU FROWARD BARNACLE</span><span class="tk-dot">◆</span>
+      <span>THOU LUMPISH GUDGEON</span><span class="tk-dot">◆</span>
+      <span>THOU PRIBBLING MAGGOT-PIE</span><span class="tk-dot">◆</span>
+      <span>THOU RANK MOLDWARP</span><span class="tk-dot">◆</span>
+      <span>THOU GLEEKING PUTTOCK</span><span class="tk-dot">◆</span>
+      <span>THOU YEASTY HARPY</span><span class="tk-dot">◆</span>
+      <span>THOU FROWARD BARNACLE</span><span class="tk-dot">◆</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     INTRO MARQUEE SECTION
+═══════════════════════════════════════ -->
+<section class="marquee-sec">
+  <div class="mq-row mq-fwd">
+    <div class="mq-track">
+      <span class="mq-item">INSULT</span><span class="mq-sep">✦</span>
+      <span class="mq-item">DECIPHER</span><span class="mq-sep">✦</span>
+      <span class="mq-item">TRIUMPH</span><span class="mq-sep">✦</span>
+      <span class="mq-item">INSULT</span><span class="mq-sep">✦</span>
+      <span class="mq-item">DECIPHER</span><span class="mq-sep">✦</span>
+      <span class="mq-item">TRIUMPH</span><span class="mq-sep">✦</span>
+      <span class="mq-item">INSULT</span><span class="mq-sep">✦</span>
+      <span class="mq-item">DECIPHER</span><span class="mq-sep">✦</span>
+    </div>
+  </div>
+  <div class="mq-row mq-rev">
+    <div class="mq-track">
+      <span class="mq-item mq-outline">SHAKESPEARE</span><span class="mq-sep">◆</span>
+      <span class="mq-item mq-outline">THE GLOBE</span><span class="mq-sep">◆</span>
+      <span class="mq-item mq-outline">1599 AD</span><span class="mq-sep">◆</span>
+      <span class="mq-item mq-outline">SHAKESPEARE</span><span class="mq-sep">◆</span>
+      <span class="mq-item mq-outline">THE GLOBE</span><span class="mq-sep">◆</span>
+      <span class="mq-item mq-outline">1599 AD</span><span class="mq-sep">◆</span>
+      <span class="mq-item mq-outline">SHAKESPEARE</span><span class="mq-sep">◆</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     GAME SECTION
+═══════════════════════════════════════ -->
+<section id="gameSec">
+
+  <div class="gs-intro reveal">
+    <div class="gs-act">ACT II</div>
+    <h2 class="gs-heading">The Oracle<br/><em>Awaits Thee</em></h2>
+    <p class="gs-sub">A Shakespearean insult shall be revealed. Study it. When thou art ready — press Reveal to learn its meaning.</p>
+  </div>
+
+  <!-- SCORE BOARD -->
+  <div class="scoreboard reveal" id="scoreRow">
+    <div class="sb-item" id="sbC">
+      <div class="sb-num" id="scoreCorrect">0</div>
+      <div class="sb-label">Correct</div>
+    </div>
+    <div class="sb-div"></div>
+    <div class="sb-item">
+      <div class="sb-num" id="scoreTotal">0</div>
+      <div class="sb-label">Played</div>
+    </div>
+    <div class="sb-div"></div>
+    <div class="sb-item sb-streak" id="sbStreak">
+      <div class="sb-num" id="scoreStreak">0</div>
+      <div class="sb-label">Streak 🔥</div>
+    </div>
+    <div class="sb-div"></div>
+    <div class="sb-item">
+      <div class="sb-num" id="sbPct">—</div>
+      <div class="sb-label">Accuracy</div>
+    </div>
+  </div>
+
+  <!-- THE STAGE -->
+  <div class="stage-wrap reveal" id="stageWrap">
+
+    <!-- left panel: the word -->
+    <div class="stage-left" id="stageLeft">
+
+      <div class="sl-header">
+        <div class="sl-badge">
+          <span class="sl-pulse"></span>
+          <span>Insult #{<span id="wordNum">—</span>}</span>
+        </div>
+        <button class="sl-skip mag" id="skipBtn">Skip →</button>
+      </div>
+
+      <div class="word-theatre" id="wordTheatre">
+        <div class="wt-light wt-l1"></div>
+        <div class="wt-light wt-l2"></div>
+        <div class="wt-light wt-l3"></div>
+        <div class="wt-corner wt-tl">✦</div>
+        <div class="wt-corner wt-tr">✦</div>
+        <div class="wt-corner wt-bl">✦</div>
+        <div class="wt-corner wt-br">✦</div>
+        <div class="wt-inner">
+          <p class="wt-word" id="currentWord">
+            <span class="wt-placeholder">Press "New Word"<br/>to begin thy lesson</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="sl-actions" id="mainBtns">
+        <button class="action-btn ab-primary mag" id="newWordBtn">
+          <span class="ab-icon">🎲</span>
+          <span class="ab-label">New Word</span>
+        </button>
+        <button class="action-btn ab-secondary mag" id="hintBtn" disabled>
+          <span class="ab-icon">💡</span>
+          <span class="ab-label">Hint</span>
+        </button>
+        <button class="action-btn ab-secondary mag" id="revealBtn" disabled>
+          <span class="ab-icon">👁</span>
+          <span class="ab-label">Reveal</span>
+        </button>
+      </div>
+
+      <div class="knew-row hidden" id="knewItRow">
+        <p class="kr-q">Did thou know it?</p>
+        <div class="kr-btns">
+          <button class="action-btn ab-green mag" id="yesBtn">✅ I knew it!</button>
+          <button class="action-btn ab-red mag" id="noBtn">❌ I didn't</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- right panel: hint + answer -->
+    <div class="stage-right" id="stageRight">
+
+      <div class="sr-empty" id="srEmpty">
+        <div class="sre-icon">🪶</div>
+        <p>The Bard's quill rests…<br/>Press Hint or Reveal to learn more.</p>
+      </div>
+
+      <div class="hint-panel hidden" id="hintArea">
+        <div class="info-pill ip-hint">💡 Hint</div>
+        <p class="ip-body" id="hintText"></p>
+      </div>
+
+      <div class="answer-panel hidden" id="answerArea">
+        <div class="info-pill ip-answer">📖 Meaning</div>
+        <p class="ap-meaning" id="answerText"></p>
+        <div class="ap-divider">
+          <span class="apd-line"></span>
+          <span class="apd-gem">◆</span>
+          <span class="apd-line"></span>
+        </div>
+        <div class="ap-example">
+          <div class="ape-label">Used in sentence</div>
+          <blockquote class="ape-quote" id="exampleText"></blockquote>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════
+     HISTORY SECTION
+═══════════════════════════════════════ -->
+<section id="histSec">
+  <div class="hs-intro reveal">
+    <div class="gs-act">ACT III</div>
+    <h2 class="gs-heading">The Scroll<br/><em>of Thy Deeds</em></h2>
+  </div>
+  <div class="hist-bar reveal">
+    <span class="hist-count" id="histCount">0 words encountered</span>
+    <button class="pill-btn pill-sm mag" id="clearBtn">🗑 Clear Scroll</button>
+  </div>
+  <div class="hist-grid" id="historyList">
+    <div class="hg-empty">No words yet — begin thy lesson in Act II above.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-left">
+      <div class="sf-logo">❦ The Globe's Insult Oracle</div>
+      <p>For educational &amp; entertainment purposes only.<br/>No real persons are insulted herein.</p>
+    </div>
+    <div class="sf-right">
+      <div class="sf-quote">"All the world's a stage."</div>
+      <div class="sf-attr">— William Shakespeare</div>
+    </div>
+  </div>
+  <div class="sf-bottom">Built with Node.js · Express · Vanilla WebGL</div>
+</footer>
+
+<!-- PARTICLE POOL -->
+<div id="burstPool"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
