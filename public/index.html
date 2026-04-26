@@ -15,16 +15,11 @@
 <div id="curOuter"></div>
 <div id="curText" class="cur-text"></div>
 
-<!-- WEBGL CANVAS -->
 <canvas id="gl"></canvas>
 
-<!-- NOISE + VIGNETTE -->
 <div class="noise"></div>
 <div class="vignette"></div>
 
-<!-- ═══════════════════════════════════════
-     PRELOADER
-═══════════════════════════════════════ -->
 <div id="loader">
   <div class="ld-bg"></div>
   <div class="ld-body">
@@ -35,9 +30,6 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     HERO — FULL VIEWPORT
-═══════════════════════════════════════ -->
 <section id="hero">
 
   <div class="hero-noise-text">SHAKESPEARE</div>
@@ -50,7 +42,6 @@
     </div>
   </nav>
 
-  <!-- split panels -->
   <div class="hero-split">
     <div class="hero-panel hp-left" id="hpLeft">
       <div class="hp-inner">
@@ -79,7 +70,6 @@
 
     <div class="hero-panel hp-right" id="hpRight">
       <div class="hp-right-inner">
-        <!-- Animated 3D SVG theatre mask -->
         <div class="mask-scene" id="maskScene">
           <div class="mask-glow"></div>
           <svg class="mask-svg" viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,41 +88,28 @@
                 <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
             </defs>
-            <!-- Tragedy mask -->
             <g class="mask-face" filter="url(#glow)">
               <ellipse cx="200" cy="200" rx="130" ry="155" fill="url(#mgold)" stroke="#8a6820" stroke-width="1.5"/>
-              <!-- brow ridge -->
               <path d="M100 150 Q200 120 300 150" stroke="#8a6820" stroke-width="2" fill="none" opacity="0.5"/>
-              <!-- eyes hollow -->
               <ellipse cx="155" cy="175" rx="28" ry="20" fill="url(#meye)"/>
               <ellipse cx="245" cy="175" rx="28" ry="20" fill="url(#meye)"/>
-              <!-- eye glints -->
               <circle cx="160" cy="170" r="3" fill="rgba(232,201,106,0.6)"/>
               <circle cx="250" cy="170" r="3" fill="rgba(232,201,106,0.6)"/>
-              <!-- nose -->
               <path d="M195 185 L185 230 Q200 240 215 230 L205 185 Z" fill="#8a6820" opacity="0.6"/>
-              <!-- mouth — turned down (tragedy) -->
               <path d="M145 270 Q200 250 255 270" stroke="#5a3a10" stroke-width="3" fill="none" stroke-linecap="round"/>
               <path d="M145 270 Q135 285 145 295" stroke="#5a3a10" stroke-width="2" fill="none" stroke-linecap="round"/>
               <path d="M255 270 Q265 285 255 295" stroke="#5a3a10" stroke-width="2" fill="none" stroke-linecap="round"/>
-              <!-- forehead detail lines -->
               <path d="M155 140 Q175 132 195 138" stroke="#8a6820" stroke-width="1.5" fill="none" opacity="0.7"/>
               <path d="M205 138 Q225 132 245 140" stroke="#8a6820" stroke-width="1.5" fill="none" opacity="0.7"/>
-              <!-- cheek contours -->
               <path d="M100 200 Q85 230 95 265" stroke="#8a6820" stroke-width="1" fill="none" opacity="0.4"/>
               <path d="M300 200 Q315 230 305 265" stroke="#8a6820" stroke-width="1" fill="none" opacity="0.4"/>
-              <!-- chin cleft -->
               <circle cx="200" cy="340" r="6" fill="#8a6820" opacity="0.3"/>
-              <!-- ornamental crown top -->
               <path d="M130 70 L155 45 L175 65 L200 30 L225 65 L245 45 L270 70 Q200 55 130 70Z" fill="url(#mgold)" stroke="#8a6820" stroke-width="1"/>
-              <!-- crown gems -->
               <circle cx="200" cy="35" r="6" fill="#c0392b"/>
               <circle cx="155" cy="50" r="4" fill="#2980b9"/>
               <circle cx="245" cy="50" r="4" fill="#27ae60"/>
-              <!-- tear drop (tragedy) -->
               <path d="M140 210 Q136 218 140 224 Q144 218 140 210Z" fill="#6a8fb0" opacity="0.8"/>
             </g>
-            <!-- floating runes -->
             <g class="runes" opacity="0.25">
               <text x="40"  y="100" font-size="20" fill="#c9a84c" font-family="serif">⚜</text>
               <text x="340" y="100" font-size="20" fill="#c9a84c" font-family="serif">⚜</text>
@@ -142,7 +119,6 @@
               <text x="320" y="380" font-size="24" fill="#c9a84c" font-family="serif">❧</text>
             </g>
           </svg>
-          <!-- floating labels -->
           <div class="mask-tag mt-1">Tragedy</div>
           <div class="mask-tag mt-2">1599 AD</div>
           <div class="mask-tag mt-3">Act I</div>
@@ -150,8 +126,6 @@
       </div>
     </div>
   </div>
-
-  <!-- scrolling ticker -->
   <div class="ticker-wrap">
     <div class="ticker">
       <span>THOU LUMPISH GUDGEON</span><span class="tk-dot">◆</span>
@@ -170,9 +144,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     INTRO MARQUEE SECTION
-═══════════════════════════════════════ -->
 <section class="marquee-sec">
   <div class="mq-row mq-fwd">
     <div class="mq-track">
@@ -199,9 +170,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     GAME SECTION
-═══════════════════════════════════════ -->
 <section id="gameSec">
 
   <div class="gs-intro reveal">
@@ -210,7 +178,6 @@
     <p class="gs-sub">A Shakespearean insult shall be revealed. Study it. When thou art ready — press Reveal to learn its meaning.</p>
   </div>
 
-  <!-- SCORE BOARD -->
   <div class="scoreboard reveal" id="scoreRow">
     <div class="sb-item" id="sbC">
       <div class="sb-num" id="scoreCorrect">0</div>
@@ -233,10 +200,8 @@
     </div>
   </div>
 
-  <!-- THE STAGE -->
   <div class="stage-wrap reveal" id="stageWrap">
 
-    <!-- left panel: the word -->
     <div class="stage-left" id="stageLeft">
 
       <div class="sl-header">
@@ -287,7 +252,6 @@
 
     </div>
 
-    <!-- right panel: hint + answer -->
     <div class="stage-right" id="stageRight">
 
       <div class="sr-empty" id="srEmpty">
@@ -319,9 +283,6 @@
 
 </section>
 
-<!-- ═══════════════════════════════════════
-     HISTORY SECTION
-═══════════════════════════════════════ -->
 <section id="histSec">
   <div class="hs-intro reveal">
     <div class="gs-act">ACT III</div>
@@ -336,9 +297,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     FOOTER
-═══════════════════════════════════════ -->
 <footer class="site-footer">
   <div class="sf-inner">
     <div class="sf-left">
@@ -350,10 +308,11 @@
       <div class="sf-attr">— William Shakespeare</div>
     </div>
   </div>
-  <div class="sf-bottom">Built with Node.js · Express · Vanilla WebGL</div>
+  <div class="sf-bottom">
+    Made with ❤️ by Hadi Hajj Houssein
+  </div>
 </footer>
 
-<!-- PARTICLE POOL -->
 <div id="burstPool"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -361,3 +320,5 @@
 <script src="app.js"></script>
 </body>
 </html>
+
+
