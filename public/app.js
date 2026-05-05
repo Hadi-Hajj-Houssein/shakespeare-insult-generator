@@ -538,9 +538,6 @@ function cardBurst(col) {
 }
 
 
-/* ════════════════════════════════════════════════════════════
-   11. WORD DATABASE — 20 Shakespearean Insults
-   ════════════════════════════════════════════════════════════ */
 const WORDS = [
   {
     word:    "Thou lumpish hedge-born clotpole!",
@@ -664,10 +661,129 @@ const WORDS = [
   },
 ];
 
+const MORE_WORDS = [
+  {
+    word:    "Thou cockered knotty-pated jackanapes!",
+    hint:    "'Cockered' means spoiled or pampered, 'knotty-pated' means thick-headed or stubborn, and a jackanapes is a cheeky little imp of a fool.",
+    meaning: "A spoiled, stubborn, insolent fool. Someone so pampered and thick-headed that they strut about like a noisy little monkey with no sense at all.",
+    example: "Thou cockered knotty-pated jackanapes! Thou hast been indulged so long that even common courtesy doth flee from thee."
+  },
+  {
+    word:    "Thou beetle-brained piebald cur!",
+    hint:    "'Beetle-brained' means thick-headed, and a cur is a low, mangy dog. 'Piebald' suggests a patchy, miserable sort of creature.",
+    meaning: "A patchwork, mangy, thick-headed coward. A worthless dog of a person with no intelligence and even less dignity.",
+    example: "Begone, thou beetle-brained piebald cur! Thy opinions are as ragged as thy courage."
+  },
+  {
+    word:    "Thou spleeny hedge-rat varlet!",
+    hint:    "'Spleeny' means irritable and bad-tempered, a hedge-rat is a lowly creature, and a varlet is a scoundrel or servant of the lowest sort.",
+    meaning: "A sour, irritable little nobody. A mean, low-born pest who snaps at everyone and contributes nothing but ill humour.",
+    example: "Thou spleeny hedge-rat varlet! Thou bringest vexation wherever thy miserable feet do tread."
+  },
+  {
+    word:    "Thou muddy-eyed elf-skull!",
+    hint:    "An elf-skull was an old insult for a foolish person, and muddy-eyed suggests clouded judgement and poor sight — physical and mental.",
+    meaning: "A muddled, dim-witted fool. Someone whose mind is so clouded that they cannot see the obvious even when it is staring them in the face.",
+    example: "Thou muddy-eyed elf-skull! The truth standeth before thee, and yet thou dost blunder past it."
+  },
+  {
+    word:    "Thou rank-skinned malt-worm!",
+    hint:    "'Rank' means foul-smelling or disgusting, and a malt-worm is an old term for a drunkard who lives for ale.",
+    meaning: "A reeking drunkard. A foul, bloated sot whose life is ruled by drink and whose very presence offends the senses.",
+    example: "Stand back, thou rank-skinned malt-worm! Thy breath alone could fell a stable of horses."
+  },
+  {
+    word:    "Thou frothy swine-bitten fustilarian!",
+    hint:    "'Frothy' suggests noisy emptiness, 'swine-bitten' means filthy as a pig, and a fustilarian is a rascal or clown.",
+    meaning: "A filthy, noisy rogue of no worth. A pig-stained fool who makes much sound and little sense.",
+    example: "Thou frothy swine-bitten fustilarian! Thy words foam forth like broth left too long upon the fire."
+  },
+  {
+    word:    "Thou pox-marked sheep-biting rogue!",
+    hint:    "Sheep-biting was a term for a sneaky thief or scoundrel, and pox-marked suggests a face and reputation both ruined.",
+    meaning: "A diseased-looking little thief. A sneaking, dishonest rogue whose vice is as plain as the marks upon his face.",
+    example: "Thou pox-marked sheep-biting rogue! Thy hands are quicker than thy conscience and far filthier than thy boots."
+  },
+  {
+    word:    "Thou craven patched-boot mooncalf!",
+    hint:    "'Craven' means cowardly, a mooncalf is a fool, and patched-boot gives the sense of a shabby, worn-out nobody.",
+    meaning: "A shabby coward and utter fool. Someone so timid and foolish that even their own boots seem more respectable than they do.",
+    example: "Thou craven patched-boot mooncalf! Thy fear is matched only by thy staggering stupidity."
+  },
+  {
+    word:    "Thou braggartly kitchen-bred scullion!",
+    hint:    "A scullion is the lowest sort of kitchen servant, and braggartly means boastful and full of hot air.",
+    meaning: "A boastful, low-born servant of a fool. Someone with humble stock, no manners, and an inflated opinion of their own worth.",
+    example: "Thou braggartly kitchen-bred scullion! Thou dost strut as though thou wert born to a throne, when in truth thou art fit only for the scullery."
+  },
+  {
+    word:    "Thou puffed-up flap-eared ninnyhammer!",
+    hint:    "'Puffed-up' means arrogantly inflated, flap-eared suggests silly or drooping ears, and a ninnyhammer is a stupid person.",
+    meaning: "An arrogant simpleton. A silly fool who swells with pride despite possessing neither sense nor self-respect.",
+    example: "Thou puffed-up flap-eared ninnyhammer! Thy pride is enormous, but thy wit could hide beneath a thimble."
+  },
+  {
+    word:    "Thou clammy-bellied toad-hunter!",
+    hint:    "'Clammy-bellied' suggests a cold, nervous stomach, and a toad-hunter is a creepy meddler chasing filthy, unpleasant things.",
+    meaning: "A creepy, anxious meddler. Someone who snoops around vile business with a weak stomach and a worse character.",
+    example: "Thou clammy-bellied toad-hunter! Thou sniffest after filth and then feignest surprise when thou findest it."
+  },
+  {
+    word:    "Thou sour-faced nit-catcher!",
+    hint:    "A nit-catcher was someone who picked lice from hair, and sour-faced means gloomy, petty, and unpleasant.",
+    meaning: "A petty, miserable fault-finder. Someone who spends all their time picking at small nastiness while being unpleasantly annoyed by everything.",
+    example: "Thou sour-faced nit-catcher! Thou couldst find offence in a loaf of bread and quarrel with a shadow."
+  },
+  {
+    word:    "Thou foggy-minded pickle-herring!",
+    hint:    "A pickle-herring was an old term for a clownish rogue, and foggy-minded means confused or dim-witted.",
+    meaning: "A clownish, confused rogue. A silly fellow whose mind is so misted over that every thought comes out crooked.",
+    example: "Thou foggy-minded pickle-herring! Thy plans are as muddled as a harbour in heavy rain."
+  },
+  {
+    word:    "Thou weather-whipped barn-door boob!",
+    hint:    "Weather-whipped means battered by life and the elements, barn-door suggests a rough country bumpkin, and a boob is a fool.",
+    meaning: "A rough, battered bumpkin and complete fool. Someone as clumsy and common as a barn door left out in the storm.",
+    example: "Thou weather-whipped barn-door boob! Thy manners are as rustic as thy reasoning is absent."
+  },
+  {
+    word:    "Thou giddy sheep-faced caitiff!",
+    hint:    "'Giddy' means dizzy or foolish, sheep-faced suggests timid and bleatingly meek, and a caitiff is a cowardly villain.",
+    meaning: "A nervous, cowardly villain. A weak and foolish rogue who would rather bleat than stand firm for anything.",
+    example: "Thou giddy sheep-faced caitiff! Thou wilt run from a raised eyebrow and call it strategy."
+  },
+  {
+    word:    "Thou haggard eye-bleared clod!",
+    hint:    "'Haggard' means worn and rough, eye-bleared means red-eyed or dim-sighted, and a clod is a lumpish fool.",
+    meaning: "A worn-out, red-eyed dolt. A tired, dim, and thoroughly unremarkable lump of foolishness.",
+    example: "Thou haggard eye-bleared clod! Even thy weariness cannot improve thy judgement, for thou hast none."
+  },
+  {
+    word:    "Thou swaggering moldy fig!",
+    hint:    "A moldy fig is a decayed, worthless thing, and swaggering suggests loud, foolish self-importance.",
+    meaning: "A ridiculous braggart with no substance. Someone who struts and boasts despite being rotten through and through.",
+    example: "Thou swaggering moldy fig! Thou dost puff thyself up like a hero, yet smell like old fruit left in a cellar."
+  },
+  {
+    word:    "Thou snub-nosed bladder of lard!",
+    hint:    "Snub-nosed suggests a blunt, silly little face, and a bladder of lard is a fat, hollow, useless thing.",
+    meaning: "A fat, hollow, foolish person. A bloated bag of vanity with no strength, no wit, and no real worth.",
+    example: "Thou snub-nosed bladder of lard! Thou art all swelling and no substance."
+  },
+  {
+    word:    "Thou prating misbegotten hedge-hare!",
+    hint:    "'Prating' means talking nonstop and foolishly, misbegotten means ill-born or ill-made, and a hedge-hare is a timid little creature.",
+    meaning: "A noisy, ill-made coward. A pointless chatterbox with the nerves of a rabbit and the sense of a thimble.",
+    example: "Thou prating misbegotten hedge-hare! Thou chatterest like a guildhall full of parrots and meanest less than none of them."
+  },
+  {
+    word:    "Thou ill-favoured scurvy knave!",
+    hint:    "'Ill-favoured' means ugly or unpleasant to behold, scurvy suggests diseased or miserable, and a knave is a rogue.",
+    meaning: "An ugly, miserable scoundrel. A thoroughly unpleasant rogue whose looks and behaviour are equally offensive.",
+    example: "Thou ill-favoured scurvy knave! Thou art as base in spirit as thou art in countenance."
+  }
+];
 
-/* ════════════════════════════════════════════════════════════
-   12. GAME STATE & STORAGE
-   ════════════════════════════════════════════════════════════ */
 const HK = 'taw_history';
 const SK = 'taw_score';
 let current  = null;
